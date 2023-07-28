@@ -879,7 +879,7 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="TemplateListView_MouseDoubleClick" />
-                        <EventSetter Event="MouseEnter" Handler="TemplateListView_MouseEnter" />
+
 
                     </Style>
                 </ListView.ItemContainerStyle>
