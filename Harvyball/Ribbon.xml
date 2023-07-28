@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI onLoad="Ribbon_Load" xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+    <ribbon>
+        <tabs>
+            <tab idMso="TabAddIns" label="HB">
+                <group id="GrpTools" label="Tools">
+                    <button id="btnHarvey" onAction="btnHarvey_Click" label="Harvery Ball" size="large" />
+                    <button id="btnSaveSelected" imageMso="FileSaveAs" onAction="btnSaveSelected_Click" label="Save Selected" size="large" />
+                    <button id="btnSendSelected" imageMso="AttachItem" onAction="btnSendSelected_Click" label="Send Selected" size="large" />
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
