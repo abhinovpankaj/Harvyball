@@ -66,8 +66,8 @@ namespace Harvyball
                     
                     int shapeScreenX = powerPointApp.ActiveWindow.PointsToScreenPixelsX((float)shape.Left);
                     int shapeScreenY = powerPointApp.ActiveWindow.PointsToScreenPixelsY((float)shape.Top);
-                    selectedForm.Left = shapeScreenX+10;
-                    selectedForm.Top = shapeScreenY-80;
+                    selectedForm.Left = shapeScreenX+2;
+                    selectedForm.Top = shapeScreenY-60;
                     selectedForm.Show();
                    
                 }

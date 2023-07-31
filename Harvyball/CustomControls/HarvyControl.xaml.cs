@@ -47,6 +47,7 @@ namespace Harvyball.CustomControls
             System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromArgb(
                color.A, color.R, color.G, color.B);
             ColorButton.Background =  new SolidColorBrush(mediaColor);
+            popup.IsOpen = false;
         }
 
         int minvalue = 0,
@@ -94,11 +95,6 @@ namespace Harvyball.CustomControls
             popup.IsOpen = !popup.IsOpen;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             ColorDialog MyDialog = new ColorDialog();
@@ -112,8 +108,8 @@ namespace Harvyball.CustomControls
                color.A, color.R, color.G, color.B);
                 ColorButton.Background = new SolidColorBrush(mediaColor);
             }
-                
-            frm_HB.ActiveForm.Hide();
+
+            
         }
         private int RGB(int red, int green, int blue)
         {
