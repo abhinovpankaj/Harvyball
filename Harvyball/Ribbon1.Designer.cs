@@ -37,10 +37,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.GrpTools = this.Factory.CreateRibbonGroup();
+            this.btnHarvey = this.Factory.CreateRibbonButton();
             this.btnSaveSelected = this.Factory.CreateRibbonButton();
             this.btnSendSelected = this.Factory.CreateRibbonButton();
             this.GrpLibrary = this.Factory.CreateRibbonGroup();
-            this.btnHarvey = this.Factory.CreateRibbonButton();
             this.BtnLibrary = this.Factory.CreateRibbonButton();
             this.btnDownloadTemplates = this.Factory.CreateRibbonButton();
             this.btnSaveTemplate = this.Factory.CreateRibbonButton();
@@ -64,6 +64,15 @@
             this.GrpTools.Items.Add(this.btnSendSelected);
             this.GrpTools.Label = "Tools";
             this.GrpTools.Name = "GrpTools";
+            // 
+            // btnHarvey
+            // 
+            this.btnHarvey.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btnHarvey.Image = ((System.Drawing.Image)(resources.GetObject("btnHarvey.Image")));
+            this.btnHarvey.Label = "Harvery Ball";
+            this.btnHarvey.Name = "btnHarvey";
+            this.btnHarvey.ShowImage = true;
+            this.btnHarvey.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnHarvey_Click);
             // 
             // btnSaveSelected
             // 
@@ -90,15 +99,6 @@
             this.GrpLibrary.Items.Add(this.btnSaveTemplate);
             this.GrpLibrary.Label = "Insert";
             this.GrpLibrary.Name = "GrpLibrary";
-            // 
-            // btnHarvey
-            // 
-            this.btnHarvey.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btnHarvey.Image = ((System.Drawing.Image)(resources.GetObject("btnHarvey.Image")));
-            this.btnHarvey.Label = "Harvery Ball";
-            this.btnHarvey.Name = "btnHarvey";
-            this.btnHarvey.ShowImage = true;
-            this.btnHarvey.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnHarvey_Click);
             // 
             // BtnLibrary
             // 

@@ -3,13 +3,24 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using FlatIcons;
+using System.Runtime.InteropServices;
+using System;
+using Microsoft.Office.Tools;
+//using Microsoft.Office.Core;
+using System.Drawing;
+using Harvyball.CustomControls;
+using System.Net.Cache;
+using System.Windows.Forms.Integration;
+using Harvyball.Harvyballs;
+using System.Linq;
 
 namespace Harvyball
 {
     public partial class ThisAddIn
     {
+
         PowerPoint.Application powerPointApp;
-        private List<Form> openForms = new List<Form>();
+        private Dictionary<string,HarvyHost> openForms = new Dictionary<string, HarvyHost>();
         
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -17,60 +28,66 @@ namespace Harvyball
 
             powerPointApp = Globals.ThisAddIn.Application;
             powerPointApp.WindowSelectionChange += PowerPointApp_WindowSelectionChange;
+
+            
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
         // Event handler for the WindowSelectionChange event
-        private void PowerPointApp_WindowSelectionChange(PowerPoint.Selection sel)
+
+       
+        private void PowerPointApp_WindowSelectionChange(PowerPoint.Selection selectedShape)
         {
 
-            if (sel.Type == PowerPoint.PpSelectionType.ppSelectionShapes && sel.ShapeRange.Count > 0)
+            if (selectedShape.Type == PowerPoint.PpSelectionType.ppSelectionShapes && selectedShape.ShapeRange.Count > 0)
             {
-                PowerPoint.Shape shape = sel.ShapeRange[1];
+                PowerPoint.Shape shape = selectedShape.ShapeRange[1];
                 
                 if (Strings.Left(shape.Name, 3) == "hb~")
                 {
-                    foreach (Form form in openForms)
-                    {
-                        form.Close();
-                    }
-                    openForms.Clear();
-                    Form frmHB = new frm_HB();
-                    Form frmHB1 = new frm_HB();
+                    HarvyHost selectedForm;
+                    //foreach (Form form in openForms)
+                    //{
+                    //    form.Close();
+                    //}
+                    //openForms.Clear();
                     mod_HarveyBalls.HB_Name = shape.Id.ToString();
-                    float zoom = powerPointApp.ActiveWindow.View.Zoom / 100;
-                    var pointX = mod_HarveyBalls.ConvertPixelsToPoints(shape.Left, "X");
-                    var pointY = mod_HarveyBalls.ConvertPixelsToPoints(shape.Top, "Y");
-                    int pX = powerPointApp.ActiveWindow.PointsToScreenPixelsY(shape.Left);
-                    int pY = powerPointApp.ActiveWindow.PointsToScreenPixelsX((shape.Top * zoom) + 50f);
-                    int X = powerPointApp.ActiveWindow.PointsToScreenPixelsY(pointX);
-                    int Y = powerPointApp.ActiveWindow.PointsToScreenPixelsX(pointY);
-                    //X = (int)Math.Round((double)mod_HarveyBalls.ConvertPixelsToPoints(shape.Left,"X")) ;
-
-                    frmHB.Left = pY;
-                    frmHB.Top = pX;//new System.Drawing.Point(pX, pY);
-                    frmHB.Show();
-                    openForms.Add(frmHB);
+                    if (openForms.ContainsKey(shape.Name))
+                    {
+                        openForms.TryGetValue(shape.Name, out selectedForm);
+                    }
+                    else
+                    {
+                        selectedForm = new HarvyHost();
+                        openForms.Add(shape.Name,selectedForm);
+                    }
+                    
+                    int shapeScreenX = powerPointApp.ActiveWindow.PointsToScreenPixelsX((float)shape.Left);
+                    int shapeScreenY = powerPointApp.ActiveWindow.PointsToScreenPixelsY((float)shape.Top);
+                    selectedForm.Left = shapeScreenX+10;
+                    selectedForm.Top = shapeScreenY-80;
+                    selectedForm.Show();
+                   
                 }
                 else
                 {
-                    foreach (Form form in openForms)
+                    foreach (var form in openForms)
                     {
-                        form.Close();
+                        form.Value.Hide();
                     }
-                    openForms.Clear();
+                   // openForms.Clear();
                 }
 
             }
             else
             {
-                foreach (Form form in openForms)
+                foreach (var form in openForms)
                 {
-                    form.Close();
+                    form.Value.Hide();
                 }
-                openForms.Clear();
+                // openForms.Clear();
             }
         }
         #region VSTO generated code
