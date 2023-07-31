@@ -287,7 +287,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBox Padding="-2" Text="23"
+                <TextBox Padding="-2"
                     Name="NUDTextBox"
                     Grid.RowSpan="2"
                     VerticalContentAlignment="Center"

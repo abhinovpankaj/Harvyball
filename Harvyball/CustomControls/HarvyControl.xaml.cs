@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Color = System.Drawing.Color;
 using ColorConverter = System.Windows.Media.ColorConverter;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 namespace Harvyball.CustomControls
 {
@@ -31,9 +33,40 @@ namespace Harvyball.CustomControls
         public HarvyControl()
         {
             InitializeComponent();
-            NUDTextBox.Text = startvalue.ToString();
+            setInitialValue();
             SelectColorCommand = new RelayCommand(SelectColor,CanApplyColor);
             this.DataContext = this;
+        }
+
+        private void setInitialValue()
+        {
+            Presentation presentation = Globals.ThisAddIn.Application.ActivePresentation;
+            DocumentWindow activeWindow = presentation.Windows[1];
+            
+            Shape w_shp = activeWindow.Selection.ShapeRange[1];
+            
+            Shape h_shp = w_shp.GroupItems[1];
+
+            var oleColorValue = h_shp.Fill.ForeColor.RGB;
+
+            System.Windows.Media.Color mediaColor = System.Windows.Media.Color.FromRgb(
+    
+    (byte)(oleColorValue & 0xFF),
+    (byte)((oleColorValue >> 8) & 0xFF),
+     (byte)((oleColorValue >> 16) & 0xFF)
+);
+            
+            ColorButton.Background = new SolidColorBrush(mediaColor);
+            double adjustmentsItem2 = (double)h_shp.Adjustments[2];
+            if (adjustmentsItem2 > -180 && adjustmentsItem2 < -90)
+            {
+                NUDTextBox.Text = ((360d + adjustmentsItem2 + 90d) / 3.6d).ToString();
+            }
+            else
+            {
+                NUDTextBox.Text = ((adjustmentsItem2 + 90d) / 3.6d).ToString();
+            }
+            NUDTextBox.Focus();
         }
 
         private bool CanApplyColor(object arg)
@@ -113,6 +146,7 @@ namespace Harvyball.CustomControls
         }
         private int RGB(int red, int green, int blue)
         {
+
             return (red & 0xFF) << 16 | (green & 0xFF) << 8 | (blue & 0xFF);
         }
 
