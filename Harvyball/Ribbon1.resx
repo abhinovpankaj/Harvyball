@@ -702,4 +702,7 @@
         KooNhAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="tbtnMultiPainter.SuperTip" xml:space="preserve">
+    <value>MultiPainter will apply formats from source to one or multiple target shapes.&amp;#xA;&amp;#xA;Steps:&amp;#xA;- Select one Source Shape&amp;#xA;- Click MultiPainter Toggle button&amp;#xA;- Apply format to Target shape&amp;#xA;- Disable toggle by click on it</value>
+  </data>
 </root>
