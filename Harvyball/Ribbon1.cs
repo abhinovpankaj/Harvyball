@@ -281,16 +281,15 @@ namespace Harvyball
                                 X_Shp.PictureFormat.Crop.ShapeWidth = W1;
                                 Globals.ThisAddIn.Application.CommandBars.ExecuteMso("PictureFillCrop");
                             }
+                            else if (flg_chk_PS_width)
+                            {
+                                X_Shp.Width = W1;
+                            }
+                            else if (flg_chk_PS_height)
+                                X_Shp.Height = H1;
                         }
 
-
-
-                        else if (flg_chk_PS_width)
-                        {
-                            X_Shp.Width = W1;
-                        }
-                        else if (flg_chk_PS_height)
-                            X_Shp.Height = H1;
+                        
                     }
                     else
                     {
@@ -350,14 +349,15 @@ namespace Harvyball
                                 X_Shp.PictureFormat.Crop.ShapeWidth = W1;
                                 Globals.ThisAddIn.Application.CommandBars.ExecuteMso("PictureFillCrop");
                             }
+                            else if (flg_chk_PS_width)
+                            {
+                                X_Shp.Width = W1;
+                            }
+                            else if (flg_chk_PS_height)
+                                X_Shp.Height = H1;
                         }
 
-                        else if (flg_chk_PS_width)
-                        {
-                            X_Shp.Width = W1;
-                        }
-                        else if (flg_chk_PS_height)
-                            X_Shp.Height = H1;
+                        
                     }
                     else
                     {
