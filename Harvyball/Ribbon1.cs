@@ -400,6 +400,8 @@ namespace Harvyball
                         if (flag_pressed == true)
                         {
                             flag_pressed = false;
+                            tbtnMultiPainter.Checked = false;
+
                         }
                     }
                     else if (my_Selection.Type == PpSelectionType.ppSelectionShapes)
