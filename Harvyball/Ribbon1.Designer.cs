@@ -37,14 +37,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.GrpTools = this.Factory.CreateRibbonGroup();
-            this.GrpLibrary = this.Factory.CreateRibbonGroup();
-            this.group1 = this.Factory.CreateRibbonGroup();
             this.btnHarvey = this.Factory.CreateRibbonButton();
             this.btnSaveSelected = this.Factory.CreateRibbonButton();
             this.btnSendSelected = this.Factory.CreateRibbonButton();
+            this.GrpLibrary = this.Factory.CreateRibbonGroup();
             this.BtnLibrary = this.Factory.CreateRibbonButton();
             this.btnDownloadTemplates = this.Factory.CreateRibbonButton();
             this.btnSaveTemplate = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
             this.btnPainterSettings = this.Factory.CreateRibbonSplitButton();
             this.toggleButton1 = this.Factory.CreateRibbonToggleButton();
             this.menu1 = this.Factory.CreateRibbonMenu();
@@ -80,22 +80,6 @@
             this.GrpTools.Label = "Tools";
             this.GrpTools.Name = "GrpTools";
             // 
-            // GrpLibrary
-            // 
-            this.GrpLibrary.Items.Add(this.BtnLibrary);
-            this.GrpLibrary.Items.Add(this.btnDownloadTemplates);
-            this.GrpLibrary.Items.Add(this.btnSaveTemplate);
-            this.GrpLibrary.Label = "Insert";
-            this.GrpLibrary.Name = "GrpLibrary";
-            // 
-            // group1
-            // 
-            this.group1.Items.Add(this.btnPainterSettings);
-            this.group1.Items.Add(this.tbtnMultiPainter);
-            this.group1.Items.Add(this.splitButton1);
-            this.group1.Label = "Painter";
-            this.group1.Name = "group1";
-            // 
             // btnHarvey
             // 
             this.btnHarvey.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -123,6 +107,14 @@
             this.btnSendSelected.ShowImage = true;
             this.btnSendSelected.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnSendSelected_Click);
             // 
+            // GrpLibrary
+            // 
+            this.GrpLibrary.Items.Add(this.BtnLibrary);
+            this.GrpLibrary.Items.Add(this.btnDownloadTemplates);
+            this.GrpLibrary.Items.Add(this.btnSaveTemplate);
+            this.GrpLibrary.Label = "Insert";
+            this.GrpLibrary.Name = "GrpLibrary";
+            // 
             // BtnLibrary
             // 
             this.BtnLibrary.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -149,6 +141,14 @@
             this.btnSaveTemplate.Name = "btnSaveTemplate";
             this.btnSaveTemplate.ShowImage = true;
             this.btnSaveTemplate.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnSaveTemplate_Click);
+            // 
+            // group1
+            // 
+            this.group1.Items.Add(this.btnPainterSettings);
+            this.group1.Items.Add(this.tbtnMultiPainter);
+            this.group1.Items.Add(this.splitButton1);
+            this.group1.Label = "Painter";
+            this.group1.Name = "group1";
             // 
             // btnPainterSettings
             // 

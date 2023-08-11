@@ -283,10 +283,15 @@ namespace Harvyball
                             }
                             else if (flg_chk_PS_width)
                             {
-                                X_Shp.Width = W1;
+                                X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                //X_Shp.Width = W1;
                             }
                             else if (flg_chk_PS_height)
-                                X_Shp.Height = H1;
+                            {
+                                X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                //X_Shp.Height = H1;
+                            }
+                               
                         }
 
                         
@@ -304,12 +309,14 @@ namespace Harvyball
                             else if (flg_chk_PS_width)
                             {
                                 X_Shp.Width = W1;
+                               
 
                             }
                             else if (flg_chk_PS_height)
                             {
 
                                 X_Shp.Height = H1;
+                                
                             }
                         }
                     }
@@ -351,10 +358,11 @@ namespace Harvyball
                             }
                             else if (flg_chk_PS_width)
                             {
-                                X_Shp.Width = W1;
+                                //X_Shp.Width = W1;
+                                X_Shp.PictureFormat.Crop.ShapeWidth = W1;
                             }
                             else if (flg_chk_PS_height)
-                                X_Shp.Height = H1;
+                                X_Shp.PictureFormat.Crop.ShapeHeight = H1;
                         }
 
                         
@@ -400,7 +408,7 @@ namespace Harvyball
                         if (flag_pressed == true)
                         {
                             flag_pressed = false;
-                            tbtnMultiPainter.Checked = false;
+                            tbtnMultiPainter.Checked=false;
 
                         }
                     }
