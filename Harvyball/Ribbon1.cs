@@ -283,25 +283,21 @@ namespace Harvyball
                             }
                             else if (flg_chk_PS_width)
                             {
-                                float oldHeight = X_Shp.Height;
                                 X_Shp.PictureFormat.CropRight = 0;
                                 X_Shp.PictureFormat.CropLeft = 0;
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
-                                X_Shp.Width = W1;
-                                X_Shp.PictureFormat.Crop.PictureHeight = oldHeight;
-                                X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
+                                X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                             }
                             else if (flg_chk_PS_height)
                             {
-                                float oldWidth = X_Shp.Width;
                                 X_Shp.PictureFormat.CropRight = 0;
                                 X_Shp.PictureFormat.CropLeft = 0;
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
-                                X_Shp.Height = H1;
-                                X_Shp.PictureFormat.Crop.PictureWidth = oldWidth;
-                                X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
+                                X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
                             }
                                
                         }
@@ -369,28 +365,23 @@ namespace Harvyball
                                 Globals.ThisAddIn.Application.CommandBars.ExecuteMso("PictureFillCrop");
                             }
                             else if (flg_chk_PS_width)
-                            {
-                                float oldHeight = X_Shp.Height;
+                            {                                
                                 X_Shp.PictureFormat.CropRight = 0;
                                 X_Shp.PictureFormat.CropLeft = 0;
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
-                                X_Shp.Width = W1;
-                                X_Shp.PictureFormat.Crop.PictureHeight=oldHeight;
-                                X_Shp.PictureFormat.Crop.PictureOffsetY=0;
+                                X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                                 
-
                             }
                             else if (flg_chk_PS_height)
                             {
-                                float oldWidth = X_Shp.Width;
                                 X_Shp.PictureFormat.CropRight = 0;
                                 X_Shp.PictureFormat.CropLeft = 0;
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
-                                X_Shp.Height = H1;
-                                X_Shp.PictureFormat.Crop.PictureWidth = oldWidth;
-                                X_Shp.PictureFormat.Crop.PictureOffsetX=0;
+                                X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                X_Shp.PictureFormat.Crop.PictureOffsetY=0;
                             }
                         }
 
