@@ -289,7 +289,7 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.Width = W1;
-                                X_Shp.PictureFormat.Crop.ShapeHeight = oldHeight;
+                                X_Shp.PictureFormat.Crop.PictureHeight = oldHeight;
                                 X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
                             }
                             else if (flg_chk_PS_height)
@@ -300,7 +300,7 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.Height = H1;
-                                X_Shp.PictureFormat.Crop.ShapeWidth = oldWidth;
+                                X_Shp.PictureFormat.Crop.PictureWidth = oldWidth;
                                 X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                             }
                                
@@ -376,7 +376,7 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.Width = W1;
-                                X_Shp.PictureFormat.Crop.ShapeHeight=oldHeight;
+                                X_Shp.PictureFormat.Crop.PictureHeight=oldHeight;
                                 X_Shp.PictureFormat.Crop.PictureOffsetY=0;
                                 
 
@@ -389,7 +389,7 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.Height = H1;
-                                X_Shp.PictureFormat.Crop.ShapeWidth = oldWidth;
+                                X_Shp.PictureFormat.Crop.PictureWidth = oldWidth;
                                 X_Shp.PictureFormat.Crop.PictureOffsetX=0;
                             }
                         }
