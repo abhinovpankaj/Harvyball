@@ -599,11 +599,21 @@ namespace Harvyball
                                 }
                                 else if (flg_chk_PS_width)
                                 {
-                                    X_Shp.Width = W1;
+                                    X_Shp.PictureFormat.CropRight = 0;
+                                    X_Shp.PictureFormat.CropLeft = 0;
+                                    X_Shp.PictureFormat.CropTop = 0;
+                                    X_Shp.PictureFormat.CropBottom = 0;
+                                    X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                    X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                                 }
                                 else if (flg_chk_PS_height)
                                 {
-                                    X_Shp.Height = H1;
+                                    X_Shp.PictureFormat.CropRight = 0;
+                                    X_Shp.PictureFormat.CropLeft = 0;
+                                    X_Shp.PictureFormat.CropTop = 0;
+                                    X_Shp.PictureFormat.CropBottom = 0;
+                                    X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                    X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
                                 }
                             }
                         }
