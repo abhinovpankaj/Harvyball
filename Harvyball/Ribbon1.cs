@@ -288,6 +288,10 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                if (X_Shp.PictureFormat.Crop.PictureWidth < W1)
+                                {
+                                    X_Shp.PictureFormat.Crop.PictureWidth = W1;
+                                }
                                 X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                             }
                             else if (flg_chk_PS_height)
@@ -297,6 +301,11 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                if (X_Shp.PictureFormat.Crop.PictureHeight < H1)
+                                {
+                                    X_Shp.PictureFormat.Crop.PictureHeight = H1;
+                                }
+
                                 X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
                             }
                                
@@ -371,6 +380,10 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                if (X_Shp.PictureFormat.Crop.PictureWidth < W1)
+                                {
+                                    X_Shp.PictureFormat.Crop.PictureWidth = W1;
+                                }
                                 X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                                 
                             }
@@ -381,6 +394,11 @@ namespace Harvyball
                                 X_Shp.PictureFormat.CropTop = 0;
                                 X_Shp.PictureFormat.CropBottom = 0;
                                 X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                if (X_Shp.PictureFormat.Crop.PictureHeight < H1)
+                                {
+                                    X_Shp.PictureFormat.Crop.PictureHeight = H1;
+                                }
+
                                 X_Shp.PictureFormat.Crop.PictureOffsetY=0;
                             }
                         }
@@ -604,6 +622,11 @@ namespace Harvyball
                                     X_Shp.PictureFormat.CropTop = 0;
                                     X_Shp.PictureFormat.CropBottom = 0;
                                     X_Shp.PictureFormat.Crop.ShapeWidth = W1;
+                                    if (X_Shp.PictureFormat.Crop.PictureWidth<W1)
+                                    {
+                                        X_Shp.PictureFormat.Crop.PictureWidth = W1;
+                                    }
+                                    
                                     X_Shp.PictureFormat.Crop.PictureOffsetX = 0;
                                 }
                                 else if (flg_chk_PS_height)
@@ -613,6 +636,11 @@ namespace Harvyball
                                     X_Shp.PictureFormat.CropTop = 0;
                                     X_Shp.PictureFormat.CropBottom = 0;
                                     X_Shp.PictureFormat.Crop.ShapeHeight = H1;
+                                    if (X_Shp.PictureFormat.Crop.PictureHeight <H1)
+                                    {
+                                        X_Shp.PictureFormat.Crop.PictureHeight = H1;
+                                    }
+                                    
                                     X_Shp.PictureFormat.Crop.PictureOffsetY = 0;
                                 }
                             }
