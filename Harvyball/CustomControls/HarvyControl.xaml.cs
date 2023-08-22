@@ -30,14 +30,498 @@ namespace Harvyball.CustomControls
     {
         public ICommand SelectColorCommand { get; private set; }
 
+        public List<PPTThemeColor> PrimaryColors { get; set; }
+        public List<PPTThemeColor> Row1Colors { get; set; }
+        public List<PPTThemeColor> Row2Colors { get; set; }
+        public List<PPTThemeColor> Row3Colors { get; set; }
+        public List<PPTThemeColor> Row4Colors { get; set; }
+        public List<PPTThemeColor> Row5Colors { get; set; }
+
+        //public List<int> RGBCollection { get; set; }
+
         public HarvyControl()
         {
             InitializeComponent();
             setInitialValue();
             SelectColorCommand = new RelayCommand(SelectColor,CanApplyColor);
+            PrimaryColors = new List<PPTThemeColor>();
+            Row1Colors = new List<PPTThemeColor>();
+            Row2Colors = new List<PPTThemeColor>();
+            Row3Colors = new List<PPTThemeColor>();
+            Row4Colors = new List<PPTThemeColor>();
+            Row5Colors = new List<PPTThemeColor>(); 
+            
+            InitColors();
             this.DataContext = this;
         }
 
+        private void InitColors()
+        {
+            Presentation presentation = Globals.ThisAddIn.Application.ActivePresentation;
+            DocumentWindow activeWindow = presentation.Windows[1];
+            var currentScheme = activeWindow.View.Slide.ColorScheme.Colors[1].RGB;
+            var theme = presentation.Designs[1].SlideMaster.Theme;
+            int backgroundfill;
+            int foregroundfill;
+            System.Windows.Media.Color mediaColor;
+            System.Windows.Media.Color mediaColorInverted;
+            if (currentScheme!=0)
+            {
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeLight1).RGB;
+                PopulateShades(backgroundfill,1,currentScheme);
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeDark1).RGB;
+                PopulateShades(backgroundfill, 2, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeLight2).RGB;
+                PopulateShades(backgroundfill, 3, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeDark2).RGB;
+                PopulateShades(backgroundfill, 4, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                
+            }
+            else
+            {
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeDark1).RGB;
+                PopulateShades(backgroundfill, 1, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeLight1).RGB;
+                PopulateShades(backgroundfill, 2, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeDark2).RGB;
+                PopulateShades(backgroundfill, 3, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeLight2).RGB;
+                PopulateShades(backgroundfill, 4, currentScheme);
+                
+                foregroundfill = backgroundfill ^ 0x00ffffff;
+                mediaColor = getColorRGB(backgroundfill);
+                mediaColorInverted = getColorRGB(foregroundfill);
+                PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+            }
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent1).RGB;
+            PopulateShades(backgroundfill, 5, currentScheme);            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent2).RGB;
+            PopulateShades(backgroundfill, 6, currentScheme);            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent3).RGB;
+            PopulateShades(backgroundfill, 7, currentScheme);
+            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent4).RGB;
+            PopulateShades(backgroundfill, 8, currentScheme);            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent5).RGB;
+            PopulateShades(backgroundfill, 9, currentScheme);            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+            backgroundfill = theme.ThemeColorScheme.Colors(Microsoft.Office.Core.MsoThemeColorSchemeIndex.msoThemeAccent6).RGB;
+            PopulateShades(backgroundfill, 10, currentScheme);            
+            foregroundfill = backgroundfill ^ 0x00ffffff;
+            mediaColor = getColorRGB(backgroundfill);
+            mediaColorInverted = getColorRGB(foregroundfill);
+            PrimaryColors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+        }
+
+        private void PopulateShades(int backgroundfill, int col, int colorScheme)
+        {
+            int colorShade = 0;
+            int shadeColor;
+            int shadeColorInverse;
+            System.Windows.Media.Color mediaColor, mediaColorInverted;
+            if (col>4 )
+            {
+                shadeColor = GetShadeTintColor(backgroundfill, 80, false);
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                shadeColor = GetShadeTintColor(backgroundfill, 60, false);
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                shadeColor = GetShadeTintColor(backgroundfill, 50, false);
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+            }
+            else
+            {
+                if (colorScheme == 0)
+                {
+                    if (col==1)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 35, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 15, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 5, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 2)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 5, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 15, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 35, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 3)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill,90, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 75, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 10, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 4)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 10, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 75, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 90, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                }
+                else
+                {
+                    if (col == 1)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 5, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 15, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 35, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 2)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 35, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 15, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 5, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 3)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 10, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 75, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 90, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+                    if (col == 4)
+                    {
+                        shadeColor = GetShadeTintColor(backgroundfill, 80, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 60, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 40, false);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 25, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+
+                        shadeColor = GetShadeTintColor(backgroundfill, 50, true);
+                        shadeColorInverse = colorShade ^ 0x00ffffff;
+                        mediaColor = getColorRGB(shadeColor);
+                        mediaColorInverted = getColorRGB(shadeColorInverse);
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                    }
+
+                }
+            }
+            
+        }
+
+        private System.Windows.Media.Color getColorRGB(int color)
+        {
+           return System.Windows.Media.Color.FromRgb(
+                            (byte)(color & 0xFF),
+                            (byte)((color >> 8) & 0xFF),
+                             (byte)((color >> 16) & 0xFF));
+        }
+
+        private int GetShadeTintColor(int color,float factor,bool isDark) // 0 is dark
+        {
+
+            //Color cl = ColorTranslator.FromOle(color);
+            int newR,newG, newB;
+            int newColor;
+            var currentR = (color >> 16)& 0xFF;
+            var currentG = ((color >> 8) & 0xFF) ;
+            var currentB = (color & 0xFF) ;
+            
+            if (isDark)
+            {
+                newR = (int)Math.Ceiling((currentR * (1 - factor/100)));
+                newG = (int)Math.Ceiling(currentG * (1 - factor/100));
+                newB = (int)Math.Ceiling(currentB * (1 - factor / 100));
+                
+            }
+            else
+            {
+                newR = (int)(currentR + (255 - currentR) * factor/100);
+                newG = (int)(currentG + (255 - currentG) * factor/100);    
+                newB = (int)(currentB + (255 - currentB) * factor/100);
+                
+            }
+
+            newColor = (newR << 16) | (newG << 8) | newB;
+            return newColor;
+        }
         private void setInitialValue()
         {
             Presentation presentation = Globals.ThisAddIn.Application.ActivePresentation;
@@ -177,6 +661,33 @@ namespace Harvyball.CustomControls
             }
 
         }       
+
+    }
+    public class PPTThemeColor
+    {
+        public System.Windows.Media.Color FillColor 
+        {
+            get;set;
+        }
+        public System.Windows.Media.Color InvertedFillColor
+        {
+            get;set;
+        }
+        public SolidColorBrush BackgroundFill 
+        {
+            get
+            {
+                return new SolidColorBrush(FillColor);
+            }
+        }
+        public SolidColorBrush ForegroundFill 
+        {
+            get
+            {
+                return new SolidColorBrush(InvertedFillColor);
+            }
+        }
+
 
     }
 }

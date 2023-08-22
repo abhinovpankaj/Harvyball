@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harvyball", "Harvyball\Harvyball.csproj", "{87F323B5-A09B-48A3-A8B2-1D578883E9FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{BFC047CC-36AB-4801-B48B-5153D343579D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{87F323B5-A09B-48A3-A8B2-1D578883E9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F323B5-A09B-48A3-A8B2-1D578883E9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F323B5-A09B-48A3-A8B2-1D578883E9FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC047CC-36AB-4801-B48B-5153D343579D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC047CC-36AB-4801-B48B-5153D343579D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC047CC-36AB-4801-B48B-5153D343579D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC047CC-36AB-4801-B48B-5153D343579D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
