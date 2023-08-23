@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.PowerPoint;
+﻿using Harvyball.Helpers;
+using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -185,6 +186,8 @@ namespace Harvyball.CustomControls
             int shadeColor;
             int shadeColorInverse;
             System.Windows.Media.Color mediaColor, mediaColorInverted;
+            #region delete
+            /*
             if (col>4 )
             {
                 shadeColor = GetShadeTintColor(backgroundfill, 80, false);
@@ -482,8 +485,44 @@ namespace Harvyball.CustomControls
                     }
 
                 }
-            }
             
+            }
+            */
+            #endregion
+            for (int i = 0; i < 5; i++)
+            {
+                var hsl = HSLColor.FromRGB(backgroundfill);
+                var ts = HSLColor.SelectTintOrShade(hsl, i);
+                var newhsl = HSLColor.ApplyTintandShade(hsl, (float)ts);
+
+                
+                shadeColor = new HSLColor(newhsl.Hue,newhsl.Saturation, newhsl.Luminosity).ToRGB();
+                shadeColorInverse = colorShade ^ 0x00ffffff;
+                mediaColor = getColorRGB(shadeColor);
+                mediaColorInverted = getColorRGB(shadeColorInverse);
+                switch (i)
+                {
+                    case 0:
+                        Row1Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                        break;
+                    case 1:
+                        Row2Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                        break;
+                    case 2:
+                        Row3Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                        break;
+
+                    case 3:
+                        Row4Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                        break;
+                    case 4:
+                        Row5Colors.Add(new PPTThemeColor() { FillColor = mediaColor, InvertedFillColor = mediaColorInverted });
+                        break;
+                    default:
+                        break;
+                }
+                                
+            }
         }
 
         private System.Windows.Media.Color getColorRGB(int color)
@@ -660,7 +699,9 @@ namespace Harvyball.CustomControls
                 }
             }
 
-        }       
+        } 
+        
+       
 
     }
     public class PPTThemeColor
