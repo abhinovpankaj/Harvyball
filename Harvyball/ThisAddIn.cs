@@ -54,16 +54,20 @@ namespace Harvyball
                     //}
                     //openForms.Clear();
                     mod_HarveyBalls.HB_Name = shape.Id.ToString();
-                    if (openForms.ContainsKey(shape.Name))
-                    {
-                        openForms.TryGetValue(shape.Name, out selectedForm);
-                    }
-                    else
-                    {
+                    //if (openForms.ContainsKey(shape.Name))
+                    //{
+                    //    openForms.TryGetValue(shape.Name, out selectedForm);
+                    //}
+                    //else
+                    //{
                         selectedForm = new HarvyHost();
-                        openForms.Add(shape.Name,selectedForm);
+                    if (!openForms.ContainsKey(shape.Name))
+                    {
+                        openForms.Add(shape.Name, selectedForm);
                     }
-                    
+                        
+                   // }
+
                     int shapeScreenX = powerPointApp.ActiveWindow.PointsToScreenPixelsX((float)shape.Left);
                     int shapeScreenY = powerPointApp.ActiveWindow.PointsToScreenPixelsY((float)shape.Top);
                     selectedForm.Left = shapeScreenX-10;
@@ -75,9 +79,8 @@ namespace Harvyball
                 {
                     foreach (var form in openForms)
                     {
-                        form.Value.Hide();
+                        form.Value.Close();
                     }
-                   // openForms.Clear();
                 }
 
             }
@@ -85,7 +88,7 @@ namespace Harvyball
             {
                 foreach (var form in openForms)
                 {
-                    form.Value.Hide();
+                    form.Value.Close();
                 }
                 // openForms.Clear();
             }

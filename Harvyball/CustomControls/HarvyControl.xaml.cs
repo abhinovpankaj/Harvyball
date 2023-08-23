@@ -45,12 +45,7 @@ namespace Harvyball.CustomControls
             InitializeComponent();
             setInitialValue();
             SelectColorCommand = new RelayCommand(SelectColor,CanApplyColor);
-            PrimaryColors = new List<PPTThemeColor>();
-            Row1Colors = new List<PPTThemeColor>();
-            Row2Colors = new List<PPTThemeColor>();
-            Row3Colors = new List<PPTThemeColor>();
-            Row4Colors = new List<PPTThemeColor>();
-            Row5Colors = new List<PPTThemeColor>(); 
+            
             
             InitColors();
             this.DataContext = this;
@@ -58,6 +53,12 @@ namespace Harvyball.CustomControls
 
         private void InitColors()
         {
+            PrimaryColors = new List<PPTThemeColor>();
+            Row1Colors = new List<PPTThemeColor>();
+            Row2Colors = new List<PPTThemeColor>();
+            Row3Colors = new List<PPTThemeColor>();
+            Row4Colors = new List<PPTThemeColor>();
+            Row5Colors = new List<PPTThemeColor>();
             Presentation presentation = Globals.ThisAddIn.Application.ActivePresentation;
             DocumentWindow activeWindow = presentation.Windows[1];
             var currentScheme = activeWindow.View.Slide.ColorScheme.Colors[1].RGB;
@@ -671,6 +672,11 @@ namespace Harvyball.CustomControls
         {
 
             return (red & 0xFF) << 16 | (green & 0xFF) << 8 | (blue & 0xFF);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitColors();
         }
 
         private void NUDTextBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)

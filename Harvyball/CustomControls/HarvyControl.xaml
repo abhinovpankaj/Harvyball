@@ -8,7 +8,7 @@
     Width="100"
     Height="30"
     d:Height="30"
-    d:Width="100"
+    d:Width="100" Loaded="UserControl_Loaded"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="{x:Type ListViewItem}">
@@ -469,6 +469,91 @@
                                     </ListView.ItemTemplate>
 
                                 </ListView>
+
+                                <Border
+                                    Background="#DDE7EE"
+                                    BorderBrush="#BFBFBF"
+                                    BorderThickness="0,0,0,2">
+
+                                    <Label
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Content="Standard Colors"
+                                        DockPanel.Dock="Left"
+                                        FontFamily="Arial"
+                                        FontSize="11"
+                                        FontWeight="Bold"
+                                        Foreground="DarkBlue"
+                                        SnapsToDevicePixels="True" />
+
+                                </Border>
+                                <StackPanel
+                                    x:Name="LastRow"
+                                    Margin="2,1,0,2"
+                                    Orientation="Horizontal"
+                                    SnapsToDevicePixels="True">
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#c00000"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#c00000"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#ff0000"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#ff0000"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#ffc000"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#ffc000"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#ffff00"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#ffff00"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#92d050"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#92d050"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#00b050"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#00b050"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#00b0f0"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#00b0f0"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#0070c0"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#0070c0"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#002060"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#002060"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                    <Button
+                                        Margin="3,0,0,0"
+                                        Background="#7030a0"
+                                        Command="{Binding SelectColorCommand}"
+                                        CommandParameter="#7030a0"
+                                        Style="{StaticResource ColorButtonStyleFirstRow}" />
+                                </StackPanel>
                                 <Button
                                     Margin="8"
                                     Padding="4"
