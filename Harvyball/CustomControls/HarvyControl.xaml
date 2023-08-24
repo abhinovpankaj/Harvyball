@@ -284,7 +284,7 @@
                 x:Name="popup"
                 AllowsTransparency="True"
                 Focusable="True"
-                IsOpen="true"
+                
                 PlacementTarget="{Binding ElementName=ColorButton}"
                 PopupAnimation="Fade"
                 SnapsToDevicePixels="True"
